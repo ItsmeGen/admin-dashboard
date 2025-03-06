@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         text: "Deleted Successfully!",
                         duration: 3000,
                         gravity: "top",
-                        position: "left",
+                        position: "right",
                         backgroundColor: "green",
                     }).showToast();
                     fetchProducts(); // Refresh table

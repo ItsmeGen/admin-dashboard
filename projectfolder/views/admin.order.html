@@ -12,7 +12,7 @@
 <body>
     <div class="sidebar">
         <div class="logo"> 
-            <img src="logo.png" alt="Computer Bucket">
+            <img src="../img/Logo.png" alt="Computer Bucket">
         </div>
         <ul>
             <li><a href="admin.html">Product Management</a></li>
@@ -24,7 +24,40 @@
     </div>
 
     <div class="content">
+        <nav>
         <h2>Order List</h2>
+        <img src="../img/profile.png" alt="profile" class="profile-pic" onclick="toggleMenu()">
+
+            <div class="sub-menu-wrap" id="subMenu">
+                <div class="sub-menu">
+                    <div class="user-info">
+                        <img src="../img/profile.png" alt="profile" class="profile-pic">
+                        <h3>Admin</h3>
+                    </div>
+                    <hr>
+
+                    <a href="#" class="sub-menu-link">
+                        <img src="../img/profile.png" alt="profile">
+                        <p>Edit Profile</p>
+                        <span>></span>
+                    </a>
+                    <a href="#" class="sub-menu-link">
+                        <img src="../img/setting.png" alt="profile">
+                        <p>settings & Privacy</p>
+                        <span>></span>
+                    </a>
+                    <a href="#" class="sub-menu-link">
+                        <img src="../img/help.png" alt="profile">
+                        <p>Help & Support</p>
+                        <span>></span>
+                    </a>
+                    <a href="#" class="sub-menu-link">
+                        <img src="../img/logout.png" alt="profile">
+                        <p>logout</p>
+                        <span>></span>
+                    </a>
+            </div>
+        </nav>
         <table>
             <thead>
                 <tr>
@@ -47,6 +80,12 @@
         </table>
     </div>
 
-    <script src="#"></script>
+    <script>
+        let subMenu = document.getElementById('subMenu');
+
+        function toggleMenu() {
+            subMenu.classList.toggle('open-menu');
+        }
+    </script>
 </body>
 </html>
