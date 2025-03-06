@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: userlogin.html");
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,8 +56,6 @@
             </tbody>
         </table>
     </div>
-
-
-    <script src="../javascript/addNewProduct.js"></script>
+    <script src="../javascript/order.js"></script>
 </body>
 </html>

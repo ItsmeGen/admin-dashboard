@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: userlogin.html");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,29 +45,29 @@
                     <div class="sub-menu">
                         <div class="user-info">
                             <img src="../img/profile.png" alt="profile" class="profile-pic">
-                            <h3>Admin</h3>
+                            <h4>Product Manager</h4>
                         </div>
                         <hr>
 
                         <a href="#" class="sub-menu-link">
                             <img src="../img/profile.png" alt="profile">
                             <p>Edit Profile</p>
-                            <span>></span>
+                            <span></span>
                         </a>
                         <a href="#" class="sub-menu-link">
                             <img src="../img/setting.png" alt="profile">
                             <p>settings & Privacy</p>
-                            <span>></span>
+                            <span></span>
                         </a>
                         <a href="#" class="sub-menu-link">
                             <img src="../img/help.png" alt="profile">
                             <p>Help & Support</p>
-                            <span>></span>
+                            <span></span>
                         </a>
                         <a href="#" class="sub-menu-link">
                             <img src="../img/logout.png" alt="profile">
-                            <p>logout</p>
-                            <span>></span>
+                            <button onclick="logout()">Log out</button>
+                            <span></span>
                         </a>
                 </div>
         </nav>
@@ -156,27 +165,6 @@
         </div>
     </div>
 
-    <script src="../javascript/AddNewProduct.js"></script>
-    <script>
-        function toggleMenu() {
-        var subMenu = document.getElementById("subMenu");
-        if (subMenu.classList.contains("open-menu")) {
-            subMenu.classList.remove("open-menu");
-            document.body.classList.remove("menu-open");
-        } else {
-            subMenu.classList.add("open-menu");
-            document.body.classList.add("menu-open");
-        }
-    }
-
-    document.addEventListener("click", function(event) {
-        var subMenu = document.getElementById("subMenu");
-        var profilePic = document.querySelector(".profile-pic");
-        if (!subMenu.contains(event.target) && !profilePic.contains(event.target)) {
-            subMenu.classList.remove("open-menu");
-            document.body.classList.remove("menu-open");
-        }
-    });
-    </script>
 </body>
+<script src="../javascript/AddNewProduct.js"></script>  
 </html>

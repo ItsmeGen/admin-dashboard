@@ -30,12 +30,45 @@ if (!isset($_SESSION['user_id'])) {
             <li><a href="#" >Sales</a></li>
             <li><a href="#" >On Delivery</a></li>
 
-            <button onclick="logout()">Log out</button>
         </ul>
     </div>
-
     <div class="content">
-        <h2>Product List</h2>
+        <div class="top-bar">
+            <input type="text" placeholder="Search" id="search-bar">
+            <img src="../img/profile.png" alt="profile" class="profile-pic" onclick="toggleMenu()">
+        </div>
+        <nav>
+            <h2>Product List</h2>
+                <div class="sub-menu-wrap-parent" id="subMenu">
+                    <div class="sub-menu">
+                        <div class="user-info">
+                            <img src="../img/profile.png" alt="profile" class="profile-pic">
+                            <h4>Admin</h4>
+                        </div>
+                        <hr>
+
+                        <a href="#" class="sub-menu-link">
+                            <img src="../img/profile.png" alt="profile">
+                            <p>Edit Profile</p>
+                            <span></span>
+                        </a>
+                        <a href="#" class="sub-menu-link">
+                            <img src="../img/setting.png" alt="profile">
+                            <p>settings & Privacy</p>
+                            <span></span>
+                        </a>
+                        <a href="#" class="sub-menu-link">
+                            <img src="../img/help.png" alt="profile">
+                            <p>Help & Support</p>
+                            <span></span>
+                        </a>
+                        <a href="#" class="sub-menu-link">
+                            <img src="../img/logout.png" alt="profile">
+                            <button onclick="logout()">Log out</button>
+                            <span></span>
+                        </a>
+                </div>
+        </nav>
         <table>
             <thead>
                 <tr>
@@ -52,7 +85,6 @@ if (!isset($_SESSION['user_id'])) {
             </tbody>
         </table>
     </div>
-
-    <script src="../javascript/admin.js"></script>
 </body>
+<script src="../javascript/admins.js"></script>
 </html>

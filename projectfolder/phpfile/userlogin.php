@@ -33,13 +33,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             switch ($user['role']) {
                 case "Admin":
-                    header("Location: ../views/admin.html?success=Login Successfully");
+                    header("Location: ../views/admin.php?success=Login Successfully");
                     exit();
                 case "Product Manager":
-                    header("Location: ../views/product.html?success=Login Successfully");
+                    header("Location: ../views/product.php?success=Login Successfully");
                     exit();
                 case "Order Manager":
-                    header("Location: ../views/order.html?success=Login Successfully");
+                    header("Location: ../views/order.php?success=Login Successfully");
                     exit();
                 default:
                     header("Location: ../views/userlogin.html?error=Invalid role!");
