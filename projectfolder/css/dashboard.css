@@ -10,7 +10,7 @@ body {
     width: 100vw;
     overflow: hidden;
   }
-
+  
   nav {
     background-color: #f4f4f4;
     color: rgb(0, 0, 0);
@@ -302,7 +302,6 @@ body {
   .gg{
     width: 100px;
   }
-  
   .close {
     display: flex;
     flex-direction: row;

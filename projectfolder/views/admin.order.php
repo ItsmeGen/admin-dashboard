@@ -1,10 +1,12 @@
 <?php
+
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: userlogin.html");
-    exit();
-}
+if(!isset($_SESSION['user_id'])){
+header("Location: userlogin.html");
+exit();
+};
+
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Dashboard</title>
+    <title>Order Dashboard</title>
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -25,21 +27,21 @@ if (!isset($_SESSION['user_id'])) {
             <img src="../img/Logo.png" alt="Computer Bucket">
         </div>
         <ul>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">User Information</a></li>
-            <li><a href="admin.order.php">Order Management</a></li>
+            <li><a href="admin.php" >Product Management</a></li>
+            <li><a href="#" >User Information</a></li>
+            <li>Order Management</li>
             <li><a href="#" >Sales</a></li>
-            <li><a href="#" >On Delivery</a></li>
-
+            <li><a href="#">On Delivery</a></li>
         </ul>
     </div>
+
     <div class="content">
         <div class="top-bar">
             <input type="text" placeholder="Search" id="search-bar">
             <img src="../img/profile.png" alt="profile" class="profile-pic" onclick="toggleMenu()">
         </div>
         <nav>
-            <h2>Product List</h2>
+            <h2>Order List</h2>
                 <div class="sub-menu-wrap-parent" id="subMenu">
                     <div class="sub-menu">
                         <div class="user-info">
@@ -70,22 +72,30 @@ if (!isset($_SESSION['user_id'])) {
                         </a>
                 </div>
         </nav>
-        <table>
+        <table border="1">
             <thead>
                 <tr>
-                    <th>Product Id</th>
+                <th>Order Id</th>
+                    <th>User Id</th>
+                    <th>Customer Name</th>
+                    <th>Contact Number</th>
+                    <th>Address</th>
                     <th>Product Name</th>
-                    <th>Product Description</th>
                     <th>Product Price</th>
-                    <th>Product Sold</th>
-                    <th>Image Url</th>
-                    <th>Product Stock</th>
+                    <th>Product Quantity</th>
+                    <th>Total Price</th>
+                    <th>Payment Method</th>
+                    <th>Order Status</th>
+                    <th>Ordered At</th>
+                    <th>Tracking Number</th>
                 </tr>
             </thead>
-            <tbody id="productTable">
+            <tbody id="orderTable">
             </tbody>
         </table>
     </div>
+
+
+    <script src="../javascript/admin.js"></script>
 </body>
-<script src="../javascript/admin.js"></script>
 </html>

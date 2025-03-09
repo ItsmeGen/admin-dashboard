@@ -66,6 +66,46 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error fetching products:", error);
         }
     }
+    async function orderfetch() {
+        try {
+            const response = await fetch('../phpfile/orderfetch.php');
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            const orders = await response.json();
+
+            let tableBody = document.getElementById('orderTable');
+            if (!tableBody) {
+                console.error("Error: orderTable element not found.");
+                return;
+            }
+            tableBody.innerHTML = '';
+
+            orders.forEach((order) => {
+                let row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${order.id}</td>
+                    <td>${order.user_id}</td>
+                    <td>${order.customer_name}</td>
+                    <td>${order.customer_phone}</td>
+                    <td>${order.customer_address}</td>
+                    <td>${order.product_name}</td>
+                    <td>${order.price}</td>
+                    <td>${order.quantity}</td>
+                    <td>${(order.price * order.quantity).toFixed(2)}</td>
+                    <td>${order.payment_method}</td>
+                    <td>${order.order_status}</td>
+                    <td>${order.created_at}</td>
+                    <td>${order.tracking_number}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+        } catch (error) {
+            console.error("Fetch Error:", error);
+        }
+    }
+
+    orderfetch();
+
 });
 
 function toggleMenu() {
@@ -88,20 +128,49 @@ document.addEventListener("click", function(event) {
 });
 
 async function logout() {
-if (confirm("Are you sure you want to logout?")) {
-    try {
-        let response = await fetch("../phpfile/logout.php", {
-            method: "GET",
-            headers: { "Content-Type": "application/json" }
-        });
-        let data = await response.json();
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You will be logged out of your account.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, logout!",
+        cancelButtonText: "Cancel"
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+                let response = await fetch("../phpfile/logout.php", {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" }
+                });
 
-        if (data.status === "success") {
-            alert(data.message);
-            window.location.href = "../views/userlogin.html"
+                let data = await response.json();
+
+                if (data.status === "success") {
+                    Swal.fire({
+                        title: "Logged Out!",
+                        text: data.message,
+                        icon: "success",
+                        timer: 1000,
+                        showConfirmButton: false
+                    });
+
+                    setTimeout(() => {
+                        window.location.href = "../views/userlogin.html";
+                    }, 1000); 
+                }
+            } catch (error) {
+                console.error("Logout failed:", error);
+                Swal.fire({
+                    title: "Error!",
+                    text: "Logout failed. Please try again.",
+                    icon: "error",
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }
         }
-    } catch (error) {
-        console.error("Logout failed:", error);
-    }
+    });
 }
-}
+

@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id'])) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +16,7 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="sidebar">
@@ -32,10 +31,44 @@ if (!isset($_SESSION['user_id'])) {
             <li><a href="#" style="pointer-events: none; color: gray;">On Delivery</a></li>
         </ul>
     </div>
-
     <div class="content">
-        <h2>Order List</h2>
-        <table>
+        <div class="top-bar">
+            <input type="text" placeholder="Search" id="search-bar">
+            <img src="../img/profile.png" alt="profile" class="profile-pic" onclick="toggleMenu()">
+        </div>
+        <nav>
+            <h2>Order List</h2>
+                <div class="sub-menu-wrap-parent" id="subMenu">
+                    <div class="sub-menu">
+                        <div class="user-info">
+                            <img src="../img/profile.png" alt="profile" class="profile-pic">
+                            <h4>Order Manager</h4>
+                        </div>
+                        <hr>
+
+                        <a href="#" class="sub-menu-link">
+                            <img src="../img/profile.png" alt="profile">
+                            <p>Edit Profile</p>
+                            <span></span>
+                        </a>
+                        <a href="#" class="sub-menu-link">
+                            <img src="../img/setting.png" alt="profile">
+                            <p>settings & Privacy</p>
+                            <span></span>
+                        </a>
+                        <a href="#" class="sub-menu-link">
+                            <img src="../img/help.png" alt="profile">
+                            <p>Help & Support</p>
+                            <span></span>
+                        </a>
+                        <a href="#" class="sub-menu-link">
+                            <img src="../img/logout.png" alt="profile">
+                            <button onclick="logout()">Log out</button>
+                            <span></span>
+                        </a>
+                </div>
+        </nav>
+        <table border="1">
             <thead>
                 <tr>
                     <th>Order Id</th>
@@ -43,19 +76,21 @@ if (!isset($_SESSION['user_id'])) {
                     <th>Customer Name</th>
                     <th>Contact Number</th>
                     <th>Address</th>
-                    <th>Product name</th>
+                    <th>Product Name</th>
                     <th>Product Price</th>
-                    <th>Product quantity</th>
+                    <th>Product Quantity</th>
                     <th>Total Price</th>
+                    <th>Payment Method</th>
                     <th>Order Status</th>
-                    <th>Ordered at</th>
-                    <th>Actions</th>
+                    <th>Ordered At</th>
+                    <th>Tracking Number</th>
+                    <th>Action</th>
                 </tr>
             </thead>
-            <tbody id="productTable">
+            <tbody id="orderTable">
             </tbody>
         </table>
     </div>
-    <script src="../javascript/order.js"></script>
 </body>
+<script src="../javascript/orders.js"></script>
 </html>

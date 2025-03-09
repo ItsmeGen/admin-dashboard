@@ -34,6 +34,15 @@ document.addEventListener("DOMContentLoaded", function () {
           }).showToast();
       }
 
+      window.addEventListener("click", (event) => {
+        if (event.target === addProductModal) {
+            addProductModal.style.display = "none";
+        }
+        if (event.target === editProductModal) {
+            editProductModal.style.display = "none";
+        }
+    });
+    
 
     // Open Add Product Modal
     addProductBtn.addEventListener("click", () => {
@@ -133,41 +142,60 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     async function deleteProduct(productId) {
-        if (confirm("Are you sure you want to delete this product?")) {
-            try {
-                console.log("Deleting product ID:", productId);
-                const response = await fetch("../phpfile/deleteProduct.php", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ product_id: productId }),
-                });
-
-                const data = await response.json();
-                console.log("Delete response:", data);
-
-                if (data.status === "success") {
-                    Toastify({
-                        text: "Deleted Successfully!",
-                        duration: 3000,
-                        gravity: "top",
-                        position: "right",
-                        backgroundColor: "green",
-                    }).showToast();
-                    fetchProducts(); // Refresh table
-                } else {
-                    Toastify({
-                        text: "Failed to Delete",
-                        duration: 3000,
-                        gravity: "top",
-                        position: "left",
-                        backgroundColor: "green",
-                    }).showToast();
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to undo this action!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "Cancel"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    console.log("Deleting product ID:", productId);
+                    const response = await fetch("../phpfile/deleteProduct.php", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ product_id: productId }),
+                    });
+    
+                    const data = await response.json();
+                    console.log("Delete response:", data);
+    
+                    if (data.status === "success") {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Product has been deleted successfully.",
+                            icon: "success",
+                            timer: 3000,
+                            showConfirmButton: false
+                        });
+                        fetchProducts(); 
+                    } else {
+                        Swal.fire({
+                            title: "Error!",
+                            text: "Failed to delete the product.",
+                            icon: "error",
+                            timer: 3000,
+                            showConfirmButton: false
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Something went wrong.",
+                        icon: "error",
+                        timer: 3000,
+                        showConfirmButton: false
+                    });
                 }
-            } catch (error) {
-                console.error("Error:", error);
             }
-        }
+        });
     }
+    
 
     // Update Product Function
     editProductForm.addEventListener("submit", async function (event) {
@@ -187,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 text: "Product Updated Successfully!",
                 duration: 3000,
                 gravity: "top",
-                position: "left",
+                position: "center",
                 backgroundColor: "green",
             }).showToast();
             editProductModal.style.display = "none";
@@ -217,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     text: "Product Added Successfully!",
                     duration: 3000,
                     gravity: "top",
-                    position: "left",
+                    position: "center",
                     backgroundColor: "green",
                 }).showToast();
                 addProductModal.style.display = "none";
@@ -227,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     text: "Add Failed! " + data.message,
                     duration: 3000,
                     gravity: "top",
-                    position: "right",
+                    position: "center",
                     backgroundColor: "red",
                 }).showToast();
             }
@@ -259,23 +287,52 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     async function logout() {
-    if (confirm("Are you sure you want to logout?")) {
-        try {
-            let response = await fetch("../phpfile/logout.php", {
-                method: "GET",
-                headers: { "Content-Type": "application/json" }
-            });
-            let data = await response.json();
-
-            if (data.status === "success") {
-                alert(data.message);
-                window.location.href = "../views/userlogin.html"
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You will be logged out of your account.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, logout!",
+            cancelButtonText: "Cancel"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    let response = await fetch("../phpfile/logout.php", {
+                        method: "GET",
+                        headers: { "Content-Type": "application/json" }
+                    });
+    
+                    let data = await response.json();
+    
+                    if (data.status === "success") {
+                        Swal.fire({
+                            title: "Logged Out!",
+                            text: data.message,
+                            icon: "success",
+                            timer: 1000,
+                            showConfirmButton: false
+                        });
+    
+                        setTimeout(() => {
+                            window.location.href = "../views/userlogin.html";
+                        }, 1000); 
+                    }
+                } catch (error) {
+                    console.error("Logout failed:", error);
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Logout failed. Please try again.",
+                        icon: "error",
+                        timer: 3000,
+                        showConfirmButton: false
+                    });
+                }
             }
-        } catch (error) {
-            console.error("Logout failed:", error);
-        }
+        });
     }
-}
+    
 
 
 
