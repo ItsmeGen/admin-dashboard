@@ -5,9 +5,9 @@ include "db_conn.php";
 
 $sql = "SELECT orders.id, orders.user_id, orders.customer_name, orders.customer_phone, orders.customer_address,
         orders.order_status, orders.created_at, order_items.product_name, order_items.quantity, order_items.price,
-        orders.tracking_number,orders.payment_method
+        orders.tracking_number,orders.payment_method,orders.total_price
         FROM orders
-        INNER JOIN order_items ON orders.id = order_items.id"; 
+        INNER JOIN order_items ON orders.id = order_items.order_id"; 
 
 $stmt = $conn->prepare($sql);
 
@@ -28,6 +28,6 @@ if ($stmt) {
     echo json_encode(["error" => "Query preparation failed"]);
 }
 
-$stmt->close(); 
+$stmt->close();
 $conn->close(); 
 ?>

@@ -28,7 +28,7 @@ exit();
         </div>
         <ul>
             <li><a href="admin.php" >Product Management</a></li>
-            <li><a href="#" >User Information</a></li>
+            <li><a href="employeeInfo.php">Employee Management</a></li>
             <li>Order Management</li>
             <li><a href="#" >Sales</a></li>
             <li><a href="#">On Delivery</a></li>

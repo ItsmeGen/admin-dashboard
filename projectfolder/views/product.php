@@ -27,7 +27,7 @@ if (!isset($_SESSION['user_id'])) {
         </div>
         <ul>
             <li class="active">Products Management</li>
-            <li><a href="#" style="pointer-events: none; color: gray;">User Information</a></li>
+            <li><a href="#" style="pointer-events: none; color: gray;">Employee Management</a></li>
             <li><a href="#" style="pointer-events: none; color: gray;">Order Management</a></li>
             <li><a href="#" style="pointer-events: none; color: gray;">Sales</a></li>
             <li><a href="#" style="pointer-events: none; color: gray;">On Delivery</a></li>

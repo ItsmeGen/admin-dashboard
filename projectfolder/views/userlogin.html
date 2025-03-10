@@ -2,28 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/userlogin.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/userlogins.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <title>Login Form</title>
-       
+
 </head>
 <body>
-    <div class="container">
-        <h2>Login</h2>
+    <div class="login-container">
+        <h2 class="login-title">Log In</h2>
         <form action="../phpfile/userlogin.php" method="POST">
-            <input type="text" placeholder="Username" name="username" required>
-            <input type="password" id="password" placeholder="Password" name="password" required>
-            <select name="role" required>
-                <option >Select Role</option>
-                <option value="Admin">Admin</option>
-                <option value="Product Manager">Product Manager</option>
-                <option value="Order Manager">Order Manager</option>
-            </select>
-            <button type="submit">Login</button>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-container">
+                    <span class="input-icon"><img src="../img/person.png" width="20px"></span>
+                    <input name="username" type="text" id="username" class="form-control" placeholder="Enter username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-container">
+                    <span class="input-icon"><img src="../img/lock.png" width="20px"></span>
+                    <input name="password" type="password" id="password" class="form-control" placeholder="Enter password">
+                    <img src="../img/eye_open.png" width="20px" class="eye-icon" id="eyeOpen" onclick="togglePassword()" alt="Show/Hide Password">
+                    <img src="../img/eye_close.png" width="20px" class="eye-icon" id="eyeClose" onclick="togglePassword()" alt="Show/Hide Password">
+                </div>
+            </div>
+            <div class="select-container">
+                <select name="role">
+                    <option>Select Role</option>
+                    <option name ="Admin">Admin</option>
+                    <option name ="Product Manager">Product Manager</option>
+                    <option name = "Order Manager">Order Manager</option>
+                </select>
+            </div>
+           
+            <button type="submit" class="login-button">Login</button>
         </form>
     </div>
 </body>
 <script src="../javascript/mainfunction.js"></script>
+
+<script>
+    function togglePassword() {
+        let passwordInput = document.getElementById("password");
+        let eyeClose = document.getElementById('eyeClose');
+        let eyeOpen = document.getElementById('eyeOpen');
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeOpen.style.display = "flex";
+            eyeClose.style.display = "none";
+        } else {
+            passwordInput.type = "password";
+            eyeOpen.style.display = "none";
+            eyeClose.style.display = "flex";
+        }
+    }
+</script>
 </html>

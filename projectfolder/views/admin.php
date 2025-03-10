@@ -26,7 +26,7 @@ if (!isset($_SESSION['user_id'])) {
         </div>
         <ul>
             <li><a href="#">Product Management</a></li>
-            <li><a href="#">User Information</a></li>
+            <li><a href="employeeInfo.php">Employee Management</a></li>
             <li><a href="admin.order.php">Order Management</a></li>
             <li><a href="#" >Sales</a></li>
             <li><a href="#" >On Delivery</a></li>

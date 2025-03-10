@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>${order.product_name}</td>
                     <td>${order.price}</td>
                     <td>${order.quantity}</td>
-                    <td>${(order.price * order.quantity).toFixed(2)}</td>
+                    <td>${order.total_price}</td>
                     <td>${order.payment_method}</td>
                     <td>
                         <select class="status-dropdown" data-id="${order.id}">
@@ -131,43 +131,56 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('.delete-btn').forEach(button => {
             button.addEventListener('click', async function () {
                 const orderId = this.getAttribute('data-id');
-                if (confirm(`Are you sure you want to delete order #${orderId}?`)) {
-                    try {
-                        const response = await fetch('../phpfile/voidorder.php', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ id: orderId })
-                        });
-                        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                        const result = await response.json();
-
-                        if (result.success) {
-                            Toastify({
-                                text: `Order #${orderId} deleted successfully`,
-                                duration: 3000,
-                                gravity: "top",
-                                position: "center",
-                                backgroundColor: "green",
-                            }).showToast();
-                            orderfetch();
-                        } else {
-                            throw new Error(result.message || 'Failed to delete order');
+    
+                // SweetAlert2 Confirmation
+                Swal.fire({
+                    title: `Are you sure you want to delete order #${orderId}?`,
+                    text: "This action cannot be undone!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel'
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        try {
+                            const response = await fetch('../phpfile/voidorder.php', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ id: orderId })
+                            });
+    
+                            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                            const result = await response.json();
+    
+                            if (result.success) {
+                                // Success message with SweetAlert
+                                Swal.fire({
+                                    title: 'Deleted!',
+                                    text: `Order #${orderId} has been deleted.`,
+                                    icon: 'success',
+                                    confirmButtonText: 'OK'
+                                });
+                                orderfetch();
+                            } else {
+                                throw new Error(result.message || 'Failed to delete order');
+                            }
+                        } catch (error) {
+                            console.error("Delete Error:", error);
+                            Swal.fire({
+                                title: 'Error!',
+                                text: `Failed to delete order: ${error.message}`,
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
                         }
-                    } catch (error) {
-                        console.error("Delete Error:", error);
-                        Toastify({
-                            text: `Failed to delete order: ${error.message}`,
-                            duration: 3000,
-                            gravity: "top",
-                            position: "center",
-                            backgroundColor: "red",
-                        }).showToast();
                     }
-                }
+                });
             });
         });
     }
-
+    
     orderfetch();
 
 });

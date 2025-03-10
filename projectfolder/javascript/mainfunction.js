@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const addProductForm = document.getElementById("productForm");
 
     console.log("DOM fully loaded");
+    
 
       //PHP TOASTIFY 
       const params = new URLSearchParams(window.location.search);
@@ -107,6 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error fetching products:", error);
         }
     }
+    
+
 
     document.addEventListener("click", function (event) {
         if (event.target.matches(".edit-btn")) {
@@ -330,6 +333,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                 }
             }
+
         });
     }
     
