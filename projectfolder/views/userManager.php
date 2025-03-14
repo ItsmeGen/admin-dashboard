@@ -25,12 +25,13 @@ if (!isset($_SESSION['user_id'])) {
             <img src="../img/Logo.png" alt="Computer Bucket">
         </div>
         <ul>
-            <li><a href="admin.php">Product Management</a></li>
-            <li><a href="employeeInfo.php">Employee Management</a></li>
-            <li><a href="admin.order.php">Order Management</a></li>
-            <li><a href="#" >Users Management</a></li>
-            <li><a href="#" >Sales</a></li>
-            <li><a href="#" >On Delivery</a></li>
+        <li><a href="#" style="pointer-events: none; color: gray;">Product Management</a></li>
+            <li><a href="#" style="pointer-events: none; color: gray;">Employee Management</a></li>
+            <li><a href="#" style="pointer-events: none; color: gray;">Order Management</a></li>
+            <li><a href="#" style="pointer-events: none; color: gray;">Employee Management</a></li>
+            <li><a href="#">User Management</a></li>
+            <li><a href="#" style="pointer-events: none; color: gray;">Sales</a></li>
+            <li><a href="#" style="pointer-events: none; color: gray;">On Delivery</a></li>
 
         </ul>
     </div>
@@ -40,12 +41,12 @@ if (!isset($_SESSION['user_id'])) {
             <img src="../img/profile.png" alt="profile" class="profile-pic" onclick="toggleMenu()">
         </div>
         <nav>
-            <h2>Product List</h2>
+            <h2>User List</h2>
                 <div class="sub-menu-wrap-parent" id="subMenu">
                     <div class="sub-menu">
                         <div class="user-info">
                             <img src="../img/profile.png" alt="profile" class="profile-pic">
-                            <h4>Admin</h4>
+                            <h4>User Manager</h4>
                         </div>
                         <hr>
 
@@ -87,5 +88,5 @@ if (!isset($_SESSION['user_id'])) {
         </table>
     </div>
 </body>
-<script src="../javascript/admins.js"></script>
+<script src="../javascript/userManager.js"></script>
 </html>

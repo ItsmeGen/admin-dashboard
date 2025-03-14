@@ -43,6 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 case "Order Manager":
                     header("Location: ../views/order.php?success=Login Successfully");
                     exit();
+                case "User Manager":
+                    header("Location: ../views/userManager.php?success=Login Successfully");
+                    exit();
                 default:
                     header("Location: ../views/userlogin.html?error=Invalid role!");
                     exit();
