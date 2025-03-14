@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const editEmployeeModal = document.getElementById("editEmployeeModal");
     const addProductBtn = document.getElementById("addProductBtn");
     const closeAddEmpModal = document.querySelector(".add-close");
-    const closeEditModal = document.querySelector(".edit-close");
     const editEmployeeForm = document.getElementById("editEmployeeForm");
     const addEmployeeForm = document.getElementById("addEmployeeForm");
 
@@ -233,7 +232,7 @@ async function deleteEmployee(employeeId) {
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
+        cancelButtonColor: "#254d32",
         confirmButtonText: "Yes, delete it!"
     }).then(async (result) => {
         if (result.isConfirmed) {
@@ -280,7 +279,7 @@ async function logout() {
         text: "You will be logged out of your account.",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#254d32",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, logout!",
         cancelButtonText: "Cancel"

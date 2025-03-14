@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
+                    cancelButtonColor: '#254d32',
                     confirmButtonText: 'Yes, delete it!',
                     cancelButtonText: 'Cancel'
                 }).then(async (result) => {
@@ -210,7 +210,7 @@ async function logout() {
         text: "You will be logged out of your account.",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#254d32",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, logout!",
         cancelButtonText: "Cancel"

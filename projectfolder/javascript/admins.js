@@ -1,11 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const addProductModal = document.getElementById("productModal");
-    const editProductModal = document.getElementById("editProductModal");
-    const addProductBtn = document.getElementById("addProductBtn");
-    const closeAddModal = document.querySelector(".close");
-    const closeEditModal = document.querySelector(".edit-close");
-    const editProductForm = document.getElementById("editProductForm");
-    const addProductForm = document.getElementById("productForm");
 
     console.log("DOM fully loaded");
 
@@ -35,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
     fetchProducts();
-
+    //Product fetch for debugging
     async function fetchProducts() {
         try {
             console.log("Fetching products...");
@@ -66,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error fetching products:", error);
         }
     }
+    //order fetch function for debugging
     async function orderfetch() {
         try {
             const response = await fetch('../phpfile/orderfetch.php');
@@ -106,8 +100,87 @@ document.addEventListener("DOMContentLoaded", function () {
 
     orderfetch();
 
+    //user fetch for debugging
+    async function userFetch() {
+        const response = await fetch('../phpfile/userFetch.php', {
+            headers: { 'Content-Type': 'application/json' }
+        });
+        const users = await response.json();
+    
+        let tbody = document.getElementById('userTable');
+        tbody.innerHTML = '';
+    
+        users.forEach((user) => {
+            let newTable = document.createElement('tr');
+            newTable.innerHTML = `
+                <td>${user.id}</td>
+                <td>${user.username}</td>
+                <td>${user.email}</td>
+                <td>${user.status}</td>
+                <td>${user.created_at}</td>
+                <td>
+                    <button class="block-user" data-id="${user.id}" data-status="${user.status}">
+                        ${user.status === 'blocked' ? 'Unblock' : 'Block'}
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(newTable);
+        });
+    
+        // Attach event listeners after rendering
+        document.querySelectorAll('.block-user').forEach(button => {
+            button.addEventListener('click', async function() {
+                let userId = this.getAttribute('data-id');
+                let newStatus = await blockUser(userId, this);
+                this.textContent = newStatus === 'blocked' ? 'Unblock' : 'Block';
+            });
+        });
+    }
+    
+    async function blockUser(userId, button) {
+        const confirmAction = await Swal.fire({
+            title: "Are you sure?",
+            text: "You want to block the user?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#254d32",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes,Block it!"
+        });
+    
+        if (!confirmAction.isConfirmed) {
+            return;
+        }
+    
+        const response = await fetch('../phpfile/blockUser.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: userId })
+        });
+    
+        const result = await response.json();
+    
+        if (result.success) {
+            Swal.fire({
+                title: "Success!",
+                text: `User has been ${result.new_status}.`,
+                icon: "success"
+            });
+            return result.new_status;
+        } else {
+            Swal.fire({
+                title: "Error!",
+                text: "Failed to update user status.",
+                icon: "error"
+            });
+        }
+    }
+    
+    userFetch();
+    
 });
 
+// toggle Menu
 function toggleMenu() {
     var subMenu = document.getElementById("subMenu");
     if (subMenu.classList.contains("open-menu")) {
@@ -127,13 +200,15 @@ document.addEventListener("click", function(event) {
     }
 });
 
+
+//logout funtion
 async function logout() {
     Swal.fire({
         title: "Are you sure?",
         text: "You will be logged out of your account.",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#254d32",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, logout!",
         cancelButtonText: "Cancel"

@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $role = isset($_POST['role']) ? $_POST['role'] : null;
 
     if (!$username || !$password || !$role || $role == "Select Role") {
-        header("Location: userlogin.html?error=Please fill in all fields correctly!");
+        header("Location: ../views/userlogin.html?error=Please fill in all fields correctly!");
         exit();
     }
 
@@ -25,6 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($role !== $user['role']) {
                 header("Location: ../views/userlogin.html?error=Selected role does not match our records!");
                 exit();
+            }
+                
             }
 
             $_SESSION['user_id'] = $user['employee_id'];
@@ -53,5 +55,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../views/userlogin.html?error=Invalid username!");
         exit();
     }
-}
+
 ?>

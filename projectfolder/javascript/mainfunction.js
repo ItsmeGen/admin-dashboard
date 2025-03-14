@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
             text: "You won't be able to undo this action!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#254d32",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!",
             cancelButtonText: "Cancel"
@@ -288,14 +288,14 @@ document.addEventListener("DOMContentLoaded", function () {
             document.body.classList.remove("menu-open");
         }
     });
-
+    //logout function
     async function logout() {
         Swal.fire({
             title: "Are you sure?",
             text: "You will be logged out of your account.",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#254d32",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, logout!",
             cancelButtonText: "Cancel"

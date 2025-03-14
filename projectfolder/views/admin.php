@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Dashboard</title>
+    <title>Product Management</title>
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -28,6 +28,7 @@ if (!isset($_SESSION['user_id'])) {
             <li><a href="#">Product Management</a></li>
             <li><a href="employeeInfo.php">Employee Management</a></li>
             <li><a href="admin.order.php">Order Management</a></li>
+            <li><a href="admin.user.php" >Users Management</a></li>
             <li><a href="#" >Sales</a></li>
             <li><a href="#" >On Delivery</a></li>
 
