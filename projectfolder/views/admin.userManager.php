@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Management</title>
+    <title>User Management</title>
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -25,12 +25,12 @@ if (!isset($_SESSION['user_id'])) {
             <img src="../img/Logo.png" alt="Computer Bucket">
         </div>
         <ul>
-            <li><a href="#">Product Management</a></li>
+            <li><a href="admin.php">Product Management</a></li>
             <li><a href="employeeInfo.php">Employee Management</a></li>
             <li><a href="admin.order.php">Order Management</a></li>
-            <li><a href="admin.userManager.php" >Users Management</a></li>
-            <li><a href="#" >Sales</a></li>
-            <li><a href="#" >On Delivery</a></li>
+            <li><a href="admin.userManager.php">User Management</a></li>
+            <li><a href="#">Sales</a></li>
+            <li><a href="#">On Delivery</a></li>
 
         </ul>
     </div>
@@ -40,12 +40,12 @@ if (!isset($_SESSION['user_id'])) {
             <img src="../img/profile.png" alt="profile" class="profile-pic" onclick="toggleMenu()">
         </div>
         <nav>
-            <h2>Product List</h2>
+            <h2>User List</h2>
                 <div class="sub-menu-wrap-parent" id="subMenu">
                     <div class="sub-menu">
                         <div class="user-info">
                             <img src="../img/profile.png" alt="profile" class="profile-pic">
-                            <h4>Admin</h4>
+                            <h4>User Manager</h4>
                         </div>
                         <hr>
 
@@ -74,16 +74,15 @@ if (!isset($_SESSION['user_id'])) {
         <table>
             <thead>
                 <tr>
-                    <th>Product Id</th>
-                    <th>Product Name</th>
-                    <th>Product Description</th>
-                    <th>Product Price</th>
-                    <th>Product Sold</th>
-                    <th>Image Url</th>
-                    <th>Product Stock</th>
+                    <th>User Id</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Account Created</th>
+                    <th>Action</th>
                 </tr>
             </thead>
-            <tbody id="productTable">
+            <tbody id="userTable">
             </tbody>
         </table>
     </div>

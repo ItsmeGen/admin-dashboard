@@ -30,7 +30,7 @@ exit();
             <li><a href="admin.php" >Product Management</a></li>
             <li><a href="employeeInfo.php">Employee Management</a></li>
             <li>Order Management</li>
-            <li><a href="admin.user.php" >Users Management</a></li>
+            <li><a href="admin.userManager.php" >Users Management</a></li>
             <li><a href="#" >Sales</a></li>
             <li><a href="#">On Delivery</a></li>
         </ul>
@@ -97,6 +97,6 @@ exit();
     </div>
 
 
-    <script src="../javascript/admin.js"></script>
+    <script src="../javascript/admins.js"></script>
 </body>
 </html>
