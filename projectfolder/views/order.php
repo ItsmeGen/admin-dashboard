@@ -26,9 +26,12 @@ if (!isset($_SESSION['user_id'])) {
         <ul>
             <li><a href="#" style="pointer-events: none; color: gray;">Product Management</a></li>
             <li><a href="#" style="pointer-events: none; color: gray;">Employee Management</a></li>
+            <li><a href="#" style="pointer-events: none; color: gray;">User Management</a></li>
             <li>Order Management</li>
-            <li><a href="#" style="pointer-events: none; color: gray;">Sales</a></li>
-            <li><a href="#" style="pointer-events: none; color: gray;">On Delivery</a></li>
+            <li><a href="outfordelivery.php">On Delivery</a></li>
+            <li><a href="#" style="pointer-events: none; color: gray;">Delivered</a></li>
+            <li><a href="#" style="pointer-events: none; color: gray;" >Sales</a></li>
+            <li><a href="#" style="pointer-events: none; color: gray;">Product Returned</a></li>
         </ul>
     </div>
     <div class="content">

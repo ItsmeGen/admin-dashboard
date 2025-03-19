@@ -29,8 +29,10 @@ if (!isset($_SESSION['user_id'])) {
             <li><a href="#">Employee Management</a></li>
             <li><a href="admin.order.php">Order Management</a></li>
             <li><a href="admin.userManager.php" >Users Management</a></li>
+            <li><a href="#">On Delivery</a></li>
+            <li><a href="#">Delivered</a></li>
             <li><a href="#" >Sales</a></li>
-            <li><a href="#" >On Delivery</a></li>
+            <li><a href="#">Product Returned</a></li>
 
         </ul>
     </div>

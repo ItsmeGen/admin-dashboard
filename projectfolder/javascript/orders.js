@@ -56,8 +56,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         <select class="status-dropdown" data-id="${order.id}">
                             <option value="Pending" ${order.order_status === 'Pending' ? 'selected' : ''}>Pending</option>
                             <option value="Processing" ${order.order_status === 'Processing' ? 'selected' : ''}>Processing</option>
+                            <option value="Packed" ${order.order_status === 'Packed' ? 'selected' : ''}>Packed</option>
                             <option value="Shipped" ${order.order_status === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                            <option value="Out for Delivery" ${order.order_status === 'Out for Delivery' ? 'selected' : ''}>Out for Delivery</option>
                             <option value="Delivered" ${order.order_status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                            <option value="Cancelled" ${order.order_status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                            <option value="Returned" ${order.order_status === 'Returned' ? 'selected' : ''}>Returned</option>
                             <option value="Completed" ${order.order_status === 'Completed' ? 'selected' : ''}>Completed</option>
                         </select>
                     </td>
