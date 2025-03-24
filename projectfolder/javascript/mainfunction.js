@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         </td>
                         <td>${product.product_stock}</td>
                         <td>
+                        <div class="button-container">
                             <button class="edit-btn" 
                                 data-id="${product.product_id}" 
                                 data-name="${product.product_name}"
@@ -99,6 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 Edit
                             </button>
                             <button class="delete-btn" data-id="${product.product_id}">Delete</button>
+                            <div class="button-container">
                         </td>
                     </tr>
                 `;
@@ -336,6 +338,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const addProductBtn = document.getElementById('addProductBtn');
+        const productModal = document.getElementById('productModal');
+        const closeBtn = document.querySelector('.close');
+    
+        addProductBtn.addEventListener('click', function() {
+            productModal.classList.add('open');
+        });
+    
+        closeBtn.addEventListener('click', function() {
+            productModal.classList.remove('open');
+        });
+    
+        window.addEventListener('click', function(event) {
+            if (event.target == productModal) {
+                productModal.classList.remove('open');
+            }
+        });
+    });
     
 
 
