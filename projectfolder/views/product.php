@@ -55,22 +55,7 @@ if (!isset($_SESSION['user_id'])) {
                         <hr>
 
                         <a href="#" class="sub-menu-link">
-                            <img src="../img/profile.png" alt="profile">
-                            <p>Edit Profile</p>
-                            <span></span>
-                        </a>
-                        <a href="#" class="sub-menu-link">
-                            <img src="../img/setting.png" alt="profile">
-                            <p>settings & Privacy</p>
-                            <span></span>
-                        </a>
-                        <a href="#" class="sub-menu-link">
-                            <img src="../img/help.png" alt="profile">
-                            <p>Help & Support</p>
-                            <span></span>
-                        </a>
-                        <a href="#" class="sub-menu-link">
-                            <img src="../img/logout.png" alt="profile">
+                            <img src="../img/logout.png" alt="profile" onclick="logout()">
                             <button onclick="logout()">Log out</button>
                             <span></span>
                         </a>
@@ -95,12 +80,12 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 
     <div id="productModal" class="modal">
-        <div class="modal-content">
-            <div class="close_btn">
-                <span class="close">&times;</span>
-            </div>
+    <div class="modal-content">
+        <div class="modal-header">
             <h2>Add Product</h2>
-            <div class="form-container">
+            <span class="close">&times;</span>
+        </div>
+        <div class="form-container">
             <form action="../phpfile/addProduct.php" method="POST" id="productForm">
 
                 <label for="productName">Product Name:</label>
@@ -129,11 +114,11 @@ if (!isset($_SESSION['user_id'])) {
 
             <div id="editProductModal" class="modal">
     <div class="modal-content">
-        <div class="close_btn">
-            <span class="edit-close">&times;</span>
-        </div>
+    <div class="modal-header">
         <h2>Edit Product</h2>
-        <div class="form-container">
+        <span class="edit-close">&times;</span>
+    </div>
+    <div class="form-container">
             <form id="editProductForm" action="editProduct.php" method="POST">
                 <input type="hidden" id="editProductId" name="productId">
 
