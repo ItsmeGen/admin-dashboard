@@ -171,7 +171,6 @@ async function fetchEmployee() {
                 <td>${result.password}</td>
                 <td>${result.role}</td>
                 <td>
-                <div class="button-container">
                     <button class="edit-btn"
                         data-id="${result.employee_id}"
                         data-name="${result.employee_name}"
@@ -182,7 +181,6 @@ async function fetchEmployee() {
                         Edit
                     </button>
                     <button class="delete-btn" data-id="${result.employee_id}">Delete</button>
-                </div>
                 </td>
             `;
 
