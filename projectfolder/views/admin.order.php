@@ -31,8 +31,8 @@ exit();
             <li><a href="employeeInfo.php">Employee Management</a></li>
             <li>Order Management</li>
             <li><a href="admin.userManager.php" >Users Management</a></li>
-            <li><a href="#">On Delivery</a></li>
-            <li><a href="#">Delivered</a></li>
+            <li><a href="admin.outfordelivery.php">On Delivery</a></li>
+            <li><a href="admin.orderDelivered.php">Delivered</a></li>
             <li><a href="#" >Sales</a></li>
             <li><a href="#">Product Returned</a></li>
         </ul>
