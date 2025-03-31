@@ -29,7 +29,7 @@ if (!isset($_SESSION['user_id'])) {
             <li><a href="admin.order.php">Order Management</a></li>
             <li><a href="admin.userManager.php" >Users Management</a></li>
             <li><a href="admin.outfordelivery.php">On Delivery</a></li>
-            <li><a href="#">Delivered</a></li>
+            <li class="active"><a href="#">Delivered</a></li>
             <li><a href="#" >Sales</a></li>
             <li><a href="#">Product Returned</a></li>
         </ul>
@@ -48,22 +48,6 @@ if (!isset($_SESSION['user_id'])) {
                             <h4>Order Manager</h4>
                         </div>
                         <hr>
-
-                        <a href="#" class="sub-menu-link">
-                            <img src="../img/profile.png" alt="profile">
-                            <p>Edit Profile</p>
-                            <span></span>
-                        </a>
-                        <a href="#" class="sub-menu-link">
-                            <img src="../img/setting.png" alt="profile">
-                            <p>settings & Privacy</p>
-                            <span></span>
-                        </a>
-                        <a href="#" class="sub-menu-link">
-                            <img src="../img/help.png" alt="profile">
-                            <p>Help & Support</p>
-                            <span></span>
-                        </a>
                         <a href="#" class="sub-menu-link">
                             <img src="../img/logout.png" alt="profile">
                             <button onclick="logout()">Log out</button>
