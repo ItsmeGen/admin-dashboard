@@ -180,6 +180,60 @@ document.addEventListener("DOMContentLoaded", function () {
     
 });
 
+// Function to block/unblock a user
+async function blockUser(userId, button) {
+    const confirmAction = await Swal.fire({
+        title: "Are you sure?",
+        text: "You want to block the user?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#254d32",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Block it!"
+    });
+
+    if (!confirmAction.isConfirmed) {
+        return;
+    }
+
+    const response = await fetch('../phpfile/blockUser.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: userId })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+        Swal.fire({
+            title: "Success!",
+            text: `User has been ${result.new_status}.`,
+            icon: "success"
+        });
+        return result.new_status;
+    } else {
+        Swal.fire({
+            title: "Error!",
+            text: "Failed to update user status.",
+            icon: "error"
+        });
+    }
+}
+
+// Function to attach event listeners to block-user buttons
+function attachBlockUserEventListeners() {
+    document.querySelectorAll('.block-user').forEach(button => {
+        button.addEventListener('click', async function () {
+            let userId = this.getAttribute('data-id');
+            let newStatus = await blockUser(userId, this);
+            this.textContent = newStatus === 'blocked' ? 'Unblock' : 'Block';
+        });
+    });
+}
+
+// Ensure event listeners are attached initially
+attachBlockUserEventListeners();
+
 // toggle Menu
 function toggleMenu() {
     var subMenu = document.getElementById("subMenu");
@@ -249,3 +303,155 @@ async function logout() {
     });
 }
 
+// JavaScript for the search bar functionality
+document.getElementById('search-bar').addEventListener('keyup', function () {
+    const query = this.value.trim(); // Get the search query from the input field
+
+    // Send an AJAX request to the PHP script
+    fetch(`../phpfile/searchUsers.php?query=${encodeURIComponent(query)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const userTable = document.getElementById('userTable');
+            userTable.innerHTML = ''; // Clear the table body
+
+            // Populate the table with the search results
+            if (data.length > 0) {
+                data.forEach(user => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${user.id}</td>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td>${user.status}</td>
+                        <td>${user.created_at}</td>
+                        <td>
+                            <button class="block-user" data-id="${user.id}" data-status="${user.status}">
+                                ${user.status === 'blocked' ? 'Unblock' : 'Block'}
+                            </button>
+                        </td>
+                    `;
+                    userTable.appendChild(row);
+                });
+
+                // Re-attach event listeners to the new buttons
+                attachBlockUserEventListeners();
+            } else {
+                // If no results, display a message
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td colspan="6" style="text-align: center;">No users found</td>
+                `;
+                userTable.appendChild(row);
+            }
+        })
+        .catch(error => console.error('Error fetching user data:', error));
+});
+
+// Function to attach event listeners to block-user buttons
+function attachBlockUserEventListeners() {
+    document.querySelectorAll('.block-user').forEach(button => {
+        button.addEventListener('click', async function () {
+            let userId = this.getAttribute('data-id');
+            let newStatus = await blockUser(userId, this);
+            this.textContent = newStatus === 'blocked' ? 'Unblock' : 'Block';
+        });
+    });
+}
+
+// Ensure event listeners are attached initially
+attachBlockUserEventListeners();    
+
+document.getElementById('search-bar').addEventListener('keyup', function () {
+    const query = this.value.trim(); // Get the search query from the input field
+
+    // Send an AJAX request to the PHP script
+    fetch(`../phpfile/search_orders.php?query=${encodeURIComponent(query)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const orderTable = document.getElementById('orderTable');
+            orderTable.innerHTML = ''; // Clear the table body
+
+            // Populate the table with the search results
+            if (data.length > 0) {
+                data.forEach(order => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${order.id}</td>
+                        <td>${order.user_id}</td>
+                        <td>${order.customer_name}</td>
+                        <td>${order.customer_phone}</td>
+                        <td>${order.customer_address}</td>
+                        <td>${order.product_name}</td>
+                        <td>${order.price}</td>
+                        <td>${order.quantity}</td>
+                        <td>${(order.price * order.quantity).toFixed(2)}</td>
+                        <td>${order.payment_method}</td>
+                        <td>${order.order_status}</td>
+                        <td>${order.created_at}</td>
+                        <td>${order.tracking_number}</td>
+                    `;
+                    orderTable.appendChild(row);
+                });
+            } else {
+                // If no results, display a message
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td colspan="13" style="text-align: center;">No orders found</td>
+                `;
+                orderTable.appendChild(row);
+            }
+        })
+        .catch(error => console.error('Error fetching orders:', error));
+});
+
+// Initial fetch of all orders (empty query)
+fetchOrders();
+
+// Function to fetch all orders
+function fetchOrders(query = "") {
+    fetch(`../phpfile/search_orders.php?query=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => {
+            const orderTable = document.getElementById('orderTable');
+            orderTable.innerHTML = ''; // Clear the table body
+
+            if (data.length > 0) {
+                data.forEach(order => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${order.id}</td>
+                        <td>${order.user_id}</td>
+                        <td>${order.customer_name}</td>
+                        <td>${order.customer_phone}</td>
+                        <td>${order.customer_address}</td>
+                        <td>${order.product_name}</td>
+                        <td>${order.price}</td>
+                        <td>${order.quantity}</td>
+                        <td>${(order.price * order.quantity).toFixed(2)}</td>
+                        <td>${order.payment_method}</td>
+                        <td>${order.order_status}</td>
+                        <td>${order.created_at}</td>
+                        <td>${order.tracking_number}</td>
+                    `;
+                    orderTable.appendChild(row);
+                });
+            } else {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td colspan="13" style="text-align: center;">No orders found</td>
+                `;
+                orderTable.appendChild(row);
+            }
+        })
+        .catch(error => console.error('Error fetching orders:', error));
+}
