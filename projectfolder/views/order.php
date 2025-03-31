@@ -27,7 +27,7 @@ if (!isset($_SESSION['user_id'])) {
             <li><a href="#" style="pointer-events: none; color: gray;">Product Management</a></li>
             <li><a href="#" style="pointer-events: none; color: gray;">Employee Management</a></li>
             <li><a href="#" style="pointer-events: none; color: gray;">User Management</a></li>
-            <li>Order Management</li>
+            <li class="active">Order Management</li>
             <li><a href="outfordelivery.php">On Delivery</a></li>
             <li><a href="orderDelivered.php">Delivered</a></li>
             <li><a href="#" style="pointer-events: none; color: gray;" >Sales</a></li>
@@ -49,21 +49,6 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                         <hr>
 
-                        <a href="#" class="sub-menu-link">
-                            <img src="../img/profile.png" alt="profile">
-                            <p>Edit Profile</p>
-                            <span></span>
-                        </a>
-                        <a href="#" class="sub-menu-link">
-                            <img src="../img/setting.png" alt="profile">
-                            <p>settings & Privacy</p>
-                            <span></span>
-                        </a>
-                        <a href="#" class="sub-menu-link">
-                            <img src="../img/help.png" alt="profile">
-                            <p>Help & Support</p>
-                            <span></span>
-                        </a>
                         <a href="#" class="sub-menu-link">
                             <img src="../img/logout.png" alt="profile">
                             <button onclick="logout()">Log out</button>
