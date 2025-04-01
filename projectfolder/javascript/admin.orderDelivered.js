@@ -200,7 +200,7 @@ function fetchOrders(query = "") {
 
             if (data.length > 0) {
                 data.forEach(order => {
-                    if (order.order_status === "Deliverd") { // Check for "Out for Delivery" status
+                    if (order.order_status === "Delivered") { // Check for "Out for Delivery" status
                         const row = document.createElement('tr');
                         row.innerHTML = `
                             <td>${order.id}</td>
