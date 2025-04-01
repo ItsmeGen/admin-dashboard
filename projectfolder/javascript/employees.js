@@ -306,3 +306,57 @@ async function logout() {
         }
     });
 }
+
+document.getElementById('search-bar').addEventListener('keyup', function () {
+    const query = this.value.trim(); // Trim whitespace
+
+    fetch(`../phpfile/searchEmployee.php?query=${encodeURIComponent(query)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const table = document.getElementById('table');
+            table.innerHTML = ''; // Clear existing rows
+
+            if (data.length === 0) {
+                // If no results, show a message
+                const noDataRow = document.createElement('tr');
+                noDataRow.innerHTML = `<td colspan="7" style="text-align: center;">No employees found</td>`;
+                table.appendChild(noDataRow);
+                return;
+            }
+
+            data.forEach(result => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${result.employee_id}</td>
+                    <td>${result.employee_name}</td>
+                    <td>${result.contact_number}</td>
+                    <td>${result.username}</td>
+                    <td>${result.password}</td>
+                    <td>${result.role}</td>
+                    <td>
+                        <button class="edit-btn"
+                            data-id="${result.employee_id}"
+                            data-name="${result.employee_name}"
+                            data-contact="${result.contact_number}"
+                            data-username="${result.username}"
+                            data-password="${result.password}"
+                            data-role="${result.role}">
+                            Edit
+                        </button>
+                        <button class="delete-btn" data-id="${result.employee_id}">Delete</button>
+                    </td>
+                `;
+                table.appendChild(newRow);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching search results:', error);
+            const table = document.getElementById('table');
+            table.innerHTML = `<tr><td colspan="7" style="text-align: center;">Error loading data</td></tr>`;
+        });
+});

@@ -55,7 +55,7 @@ if (!isset($_SESSION['user_id'])) {
                         </a>
                 </div>
         </nav>
-        <table border="1">
+        <table border="0">
             <thead>
                 <tr>
                     <th>Order Id</th>

@@ -38,7 +38,7 @@ if (!isset($_SESSION['user_id'])) {
     </div>
     <div class="content">
         <div class="top-bar">
-            <input type="text" placeholder="Search" id="search-bar">
+        <input type="text" id="search-bar" placeholder="Search employees..." />
             <img src="../img/profile.png" alt="profile" class="profile-pic" onclick="toggleMenu()">
         </div>
         <nav>
