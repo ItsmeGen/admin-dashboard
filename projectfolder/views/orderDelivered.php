@@ -30,8 +30,8 @@ if (!isset($_SESSION['user_id'])) {
             <li><a href="order.php">Order Management</a></li>
             <li><a href="outfordelivery.php">On Delivery</a></li>
             <li class="active"><a href="#">Delivered</a></li>
+            <li><a href="returnedOrder.php">Product Returned</a></li>
             <li><a href="#" style="pointer-events: none; color: gray;" >Sales</a></li>
-            <li><a href="#" style="pointer-events: none; color: gray;">Product Returned</a></li>
         </ul>
     </div>
     <div class="content">

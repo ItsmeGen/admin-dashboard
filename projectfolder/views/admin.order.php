@@ -33,8 +33,8 @@ exit();
             <li><a href="admin.userManager.php" >Users Management</a></li>
             <li><a href="admin.outfordelivery.php">On Delivery</a></li>
             <li><a href="admin.orderDelivered.php">Delivered</a></li>
+            <li><a href="admin.returnedOrder.php">Product Returned</a></li>
             <li><a href="#" >Sales</a></li>
-            <li><a href="#">Product Returned</a></li>
         </ul>
     </div>
 

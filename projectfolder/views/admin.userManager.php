@@ -31,8 +31,8 @@ if (!isset($_SESSION['user_id'])) {
             <li class="active"><a href="admin.userManager.php">User Management</a></li>
             <li><a href="admin.outfordelivery.php">On Delivery</a></li>
             <li><a href="admin.orderDelivered.php">Delivered</a></li>
+            <li><a href="admin.returnedOrder.php">Product Returned</a></li>
             <li><a href="#" >Sales</a></li>
-            <li><a href="#">Product Returned</a></li>
             
 
         </ul>
@@ -48,7 +48,7 @@ if (!isset($_SESSION['user_id'])) {
                     <div class="sub-menu">
                         <div class="user-info">
                             <img src="../img/profile.png" alt="profile" class="profile-pic">
-                            <h4>User Manager</h4>
+                            <h4>Admin</h4>
                         </div>
                         <hr>
                         <a href="#" class="sub-menu-link">

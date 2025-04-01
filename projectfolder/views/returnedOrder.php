@@ -28,9 +28,9 @@ if (!isset($_SESSION['user_id'])) {
             <li><a href="#" style="pointer-events: none; color: gray;">Employee Management</a></li>
             <li><a href="#" style="pointer-events: none; color: gray;">User Management</a></li>
             <li><a href="order.php">Order Management</a></li>
-            <li class="active"><a href="#">On Delivery</a></li>
-            <li><a href="orderDelivered.php">Delivered</a></li>
-            <li><a href="returnedOrder.php">Product Returned</a></li>
+            <li><a href="outfordelivery.php">On Delivery</a></li>
+            <li class="active"><a href="orderDelivered.php">Delivered</a></li>
+            <li><a href="#">Product Returned</a></li>
             <li><a href="#" style="pointer-events: none; color: gray;" >Sales</a></li>
         </ul>
     </div>
@@ -40,7 +40,7 @@ if (!isset($_SESSION['user_id'])) {
             <img src="../img/profile.png" alt="profile" class="profile-pic" onclick="toggleMenu()">
         </div>
         <nav>
-            <h2>Order List</h2>
+            <h2>Return Order</h2>
                 <div class="sub-menu-wrap-parent" id="subMenu">
                     <div class="sub-menu">
                         <div class="user-info">
@@ -48,7 +48,6 @@ if (!isset($_SESSION['user_id'])) {
                             <h4>Order Manager</h4>
                         </div>
                         <hr>
-
                         <a href="#" class="sub-menu-link">
                             <img src="../img/logout.png" alt="profile">
                             <button onclick="logout()">Log out</button>
@@ -79,5 +78,5 @@ if (!isset($_SESSION['user_id'])) {
         </table>
     </div>
 </body>
-<script src="../javascript/outfordelivery.js"></script>
+<script src="../javascript/returnedOrder.js"></script>
 </html>
