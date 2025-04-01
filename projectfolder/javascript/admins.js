@@ -35,10 +35,15 @@ document.addEventListener("DOMContentLoaded", function () {
             const response = await fetch("../phpfile/productFetch.php");
             const data = await response.json();
             console.log("Products received:", data);
-
+    
             let tableBody = document.getElementById("productTable");
+            if (!tableBody) {
+                console.error("Error: productTable element not found.");
+                return;
+            }
+    
             tableBody.innerHTML = "";
-
+    
             data.forEach((product) => {
                 let row = `
                     <tr>
@@ -179,6 +184,8 @@ document.addEventListener("DOMContentLoaded", function () {
     userFetch();
     
 });
+
+
 
 // Function to block/unblock a user
 async function blockUser(userId, button) {
@@ -455,3 +462,42 @@ function fetchOrders(query = "") {
         })
         .catch(error => console.error('Error fetching orders:', error));
 }
+
+document.getElementById('search-bar').addEventListener('keyup', function() {
+    var searchValue = this.value.toLowerCase();
+    console.log('Search Value:', searchValue); // Log search value
+    fetch(`../phpfile/searchProducts.php?query=${searchValue}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Fetched Data:', data); // Log fetched data
+            var tableBody = document.getElementById('productTable');
+            tableBody.innerHTML = ''; // Clear the table
+
+            if (data.length > 0) {
+                // Populate the table with the search results
+                data.forEach(product => {
+                    var row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${product.product_id}</td>
+                        <td>${product.product_name}</td>
+                        <td>${product.product_description}</td>
+                        <td>${product.product_price}</td>
+                        <td>${product.product_sold}</td>
+                        <td>
+                            <img src="${product.product_imgUrl}" width="100" alt="Product Image">
+                        </td>
+                        <td>${product.product_stock}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } else {
+                // Display "No products found" message
+                var row = document.createElement('tr');
+                row.innerHTML = `
+                    <td colspan="7" style="text-align: center;">No products found</td>
+                `;
+                tableBody.appendChild(row);
+            }
+        })
+        .catch(error => console.error('Error fetching products:', error));
+});

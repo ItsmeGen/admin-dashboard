@@ -81,87 +81,134 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
+});
 
-    async function blockUser(userId, button) {
-        const confirmAction = await Swal.fire({
-            title: "Are you sure?",
-            text: "You want to block the user?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#254d32",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Block it!"
-        });
+// Move userFetch to the global scope
+async function userFetch() {
+    const response = await fetch('../phpfile/userFetch.php', {
+        headers: { 'Content-Type': 'application/json' }
+    });
+    const users = await response.json();
 
-        if (!confirmAction.isConfirmed) {
-            return;
-        }
+    let tbody = document.getElementById('userTable');
+    tbody.innerHTML = '';
 
-        const response = await fetch('../phpfile/blockUser.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: userId, action: 'block' })
-        });
+    users.forEach((user) => {
+        let newTable = document.createElement('tr');
+        newTable.innerHTML = `
+            <td>${user.id}</td>
+            <td>${user.username}</td>
+            <td>${user.email}</td>
+            <td>${user.status}</td>
+            <td>${user.created_at}</td>
+            <td>
+                <button class="block-user" data-id="${user.id}" data-status="${user.status}">
+                    ${user.status === 'blocked' ? 'Unblock' : 'Block'}
+                </button>
+            </td>
+        `;
+        tbody.appendChild(newTable);
+    });
 
-        const result = await response.json();
+    // Attach event listeners after rendering
+    attachBlockUserEventListeners();
+}
 
-        if (result.success) {
-            Swal.fire({
-                title: "Success!",
-                text: `User has been ${result.new_status === 'blocked' ? 'blocked' : 'unblocked'}.`,
-                icon: "success"
-            });
-            return result.new_status;
-        } else {
-            Swal.fire({
-                title: "Error!",
-                text: "Failed to update user status.",
-                icon: "error"
-            });
-        }
-    }
+// DOMContentLoaded event listener
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM fully loaded");
 
-    async function unblockUser(userId, button) {
-        const confirmAction = await Swal.fire({
-            title: "Are you sure?",
-            text: "You want to unblock this user?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#254d32",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Unblock it!"
-        });
-
-        if (!confirmAction.isConfirmed) {
-            return;
-        }
-
-        const response = await fetch('../phpfile/blockUser.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: userId, action: 'unblock' })
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            Swal.fire({
-                title: "Success!",
-                text: `User has been ${result.new_status === 'active' ? 'unblocked' : 'blocked'}.`,
-                icon: "success"
-            });
-            return result.new_status;
-        } else {
-            Swal.fire({
-                title: "Error!",
-                text: "Failed to update user status.",
-                icon: "error"
-            });
-        }
-    }
-
+    // Call userFetch to load initial data
     userFetch();
-    
+});
+
+// Define blockUser and unblockUser in the global scope
+async function blockUser(userId, button) {
+    const confirmAction = await Swal.fire({
+        title: "Are you sure?",
+        text: "You want to block the user?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#254d32",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Block it!"
+    });
+
+    if (!confirmAction.isConfirmed) {
+        return;
+    }
+
+    const response = await fetch('../phpfile/blockUser.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: userId, action: 'block' })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+        Swal.fire({
+            title: "Success!",
+            text: `User has been ${result.new_status === 'blocked' ? 'blocked' : 'unblocked'}.`,
+            icon: "success"
+        });
+        return result.new_status;
+    } else {
+        Swal.fire({
+            title: "Error!",
+            text: "Failed to update user status.",
+            icon: "error"
+        });
+    }
+}
+
+async function unblockUser(userId, button) {
+    const confirmAction = await Swal.fire({
+        title: "Are you sure?",
+        text: "You want to unblock this user?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#254d32",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Unblock it!"
+    });
+
+    if (!confirmAction.isConfirmed) {
+        return;
+    }
+
+    const response = await fetch('../phpfile/blockUser.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: userId, action: 'unblock' })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+        Swal.fire({
+            title: "Success!",
+            text: `User has been ${result.new_status === 'active' ? 'unblocked' : 'blocked'}.`,
+            icon: "success"
+        });
+        return result.new_status;
+    } else {
+        Swal.fire({
+            title: "Error!",
+            text: "Failed to update user status.",
+            icon: "error"
+        });
+    }
+}
+
+// DOMContentLoaded event listener
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM fully loaded");
+
+    // Other code...
+
+    // Call userFetch to load initial data
+    userFetch();
 });
 
 // toggle Menu
@@ -232,3 +279,80 @@ async function logout() {
         }
     });
 }
+
+document.getElementById('search-bar').addEventListener('keyup', function () {
+    const query = this.value.trim(); // Get the search query from the input field
+
+    // Send an AJAX request to the PHP script
+    fetch(`../phpfile/searchUsers.php?query=${encodeURIComponent(query)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const userTable = document.getElementById('userTable');
+            userTable.innerHTML = ''; // Clear the table body
+
+            // Populate the table with the search results
+            if (data.length > 0) {
+                data.forEach(user => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${user.id}</td>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td>${user.status}</td>
+                        <td>${user.created_at}</td>
+                        <td>
+                            <button class="block-user" data-id="${user.id}" data-status="${user.status}">
+                                ${user.status === 'blocked' ? 'Unblock' : 'Block'}
+                            </button>
+                        </td>
+                    `;
+                    userTable.appendChild(row);
+                });
+
+                // Re-attach event listeners to the new buttons
+                attachBlockUserEventListeners();
+            } else {
+                // If no results, display a message
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td colspan="6" style="text-align: center;">No users found</td>
+                `;
+                userTable.appendChild(row);
+            }
+        })
+        .catch(error => console.error('Error fetching user data:', error));
+});
+
+// Function to attach event listeners to block-user buttons
+function attachBlockUserEventListeners() {
+    document.querySelectorAll('.block-user').forEach(button => {
+        button.addEventListener('click', async function () {
+            let userId = this.getAttribute('data-id');
+            let currentStatus = this.getAttribute('data-status');
+            let newStatus;
+
+            if (currentStatus === 'blocked') {
+                newStatus = await unblockUser(userId, this);
+            } else {
+                newStatus = await blockUser(userId, this);
+            }
+
+            if (newStatus) {
+                // Update button text and data attribute
+                this.textContent = newStatus === 'blocked' ? 'Unblock' : 'Block';
+                this.setAttribute('data-status', newStatus);
+
+                // Also update the status cell in the table
+                const statusCell = this.closest('tr').querySelector('td:nth-child(4)');
+                if (statusCell) {
+                    statusCell.textContent = newStatus;
+                }
+            }
+        });
+    });
+}    
