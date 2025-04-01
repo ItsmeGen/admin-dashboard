@@ -79,10 +79,10 @@ if (!isset($_SESSION['user_id'])) {
     <!-- Employee Edit Modal -->
 <div id="editEmployeeModal" class="modal">
     <div class="modal-content">
-        <div class="close_btn">
+        <div class="modal-header">
+            <h2>Edit Employee</h2>
             <span class="edit-close">&times;</span>
         </div>
-        <h2>Edit Employee</h2>
         <div class="form-container">
             <form id="editEmployeeForm">
                 <input type="hidden" id="editEmployeeId" name="employeeId">
@@ -111,10 +111,10 @@ if (!isset($_SESSION['user_id'])) {
 <!-- Add Employee Modal -->
 <div id="addEmployeeModal" class="modal">
     <div class="modal-content">
-        <div class="close_btn">
+    <div class="modal-header">
+            <h2>Add New Employee</h2>
             <span class="add-close">&times;</span>
         </div>
-        <h2>Add New Employee</h2>
         <div class="form-container">
             <form id="addEmployeeForm">
                 <label for="addEmployeeName">Employee Name:</label>

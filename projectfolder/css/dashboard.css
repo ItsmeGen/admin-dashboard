@@ -300,7 +300,7 @@ table tbody tr:last-of-type {
   margin: 0;
 }
 
-.edit-close, .close {
+.edit-close, .close, .add-close {
   font-size: 3rem; /* Increase the size of the close button */
   cursor: pointer;
   color: #ff0000;

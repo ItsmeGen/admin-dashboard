@@ -3,10 +3,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const editEmployeeModal = document.getElementById("editEmployeeModal");
     const addProductBtn = document.getElementById("addProductBtn");
     const closeAddEmpModal = document.querySelector(".add-close");
+    const closeEditEmpModal = document.querySelector(".edit-close");
     const editEmployeeForm = document.getElementById("editEmployeeForm");
     const addEmployeeForm = document.getElementById("addEmployeeForm");
 
     console.log("DOM fully loaded");
+
+    // Close Edit Employee Modal
+    if (closeEditEmpModal) {
+        closeEditEmpModal.addEventListener("click", function () {
+            editEmployeeModal.style.display = "none";
+        });
+    }
 
     // Open Add Employee Modal
     addProductBtn.addEventListener("click", function() {
