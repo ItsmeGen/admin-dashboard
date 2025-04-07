@@ -163,6 +163,7 @@ nav {
 .sidebar .logo img {
   width: 100%;
   max-width: 150px;
+  scale: 1.2;
   display: block;
   margin: 0 auto;
 }
@@ -430,6 +431,58 @@ table tbody tr:last-of-type {
   background-color: #ff2037;
 }
 
+.status-dropdown {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.status-dropdown:focus {
+  border-color: #007bff;
+  outline: none;
+  background-color: #fff;
+}
+
+.status-dropdown option {
+  padding: 5px;
+  background-color: #fff;
+  color: #333;
+}
+
+table-wrapper {
+  overflow-x: auto; /* Add horizontal scrolling for the table */
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.button-container .delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button-container .edit-btn {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
 /* Define keyframes for animations */
 @keyframes fadeIn {
 from {
@@ -572,3 +625,4 @@ animation: fadeIn 0.5s ease-in-out;
       padding: 5px;
   }
 }
+

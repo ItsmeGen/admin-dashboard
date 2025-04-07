@@ -7,11 +7,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <title>Login Form</title>
-
+    <style>
+        .login-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .login-title {
+            margin: 0;
+        }
+        .logo-image {
+            width: 100px;
+            height: 40px;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
-        <h2 class="login-title">Log In</h2>
+        <div class="login-title-container">
+            <h2 class="login-title">Log In</h2>
+            <img src="../img/logo.png" alt="Logo" class="logo-image">
+        </div>
         <form action="../phpfile/userlogin.php" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>

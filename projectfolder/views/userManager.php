@@ -31,7 +31,6 @@ if (!isset($_SESSION['user_id'])) {
             <li><a href="#" style="pointer-events: none; color: gray;">Order Management</a></li>
             <li><a href="#" style="pointer-events: none; color: gray;">On Delivery</a></li>
             <li><a href="#" style="pointer-events: none; color: gray;">Delivered</a></li>
-            <li><a href="#" style="pointer-events: none; color: gray;">Sales</a></li>
             <li><a href="#" style="pointer-events: none; color: gray;">Product Returned</a></li>
         </ul>
     </div>

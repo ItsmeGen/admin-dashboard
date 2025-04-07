@@ -31,7 +31,6 @@ if (!isset($_SESSION['user_id'])) {
             <li class="active"><a href="admin.outfordelivery.php">On Delivery</a></li>
             <li><a href="admin.orderDelivered.php">Delivered</a></li>
             <li><a href="admin.returnedOrder.php">Product Returned</a></li>
-            <li><a href="#" >Sales</a></li>
         </ul>
     </div>
     <div class="content">
