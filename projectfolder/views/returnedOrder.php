@@ -29,9 +29,8 @@ if (!isset($_SESSION['user_id'])) {
             <li><a href="#" style="pointer-events: none; color: gray;">User Management</a></li>
             <li><a href="order.php">Order Management</a></li>
             <li><a href="outfordelivery.php">On Delivery</a></li>
-            <li class="active"><a href="orderDelivered.php">Delivered</a></li>
-            <li><a href="#">Product Returned</a></li>
-            <li><a href="#" style="pointer-events: none; color: gray;" >Sales</a></li>
+            <li><a href="orderDelivered.php">Delivered</a></li>
+            <li class="active"><a href="#">Product Returned</a></li>
         </ul>
     </div>
     <div class="content">
@@ -55,7 +54,7 @@ if (!isset($_SESSION['user_id'])) {
                         </a>
                 </div>
         </nav>
-        <table border="1">
+        <table border="0">
             <thead>
                 <tr>
                     <th>Order Id</th>

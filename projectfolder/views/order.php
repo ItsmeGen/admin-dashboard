@@ -31,7 +31,6 @@ if (!isset($_SESSION['user_id'])) {
             <li><a href="outfordelivery.php">On Delivery</a></li>
             <li><a href="orderDelivered.php">Delivered</a></li>
             <li><a href="returnedOrder.php">Product Returned</a></li>
-            <li><a href="#" style="pointer-events: none; color: gray;" >Sales</a></li>
         </ul>
     </div>
     <div class="content">
@@ -56,6 +55,7 @@ if (!isset($_SESSION['user_id'])) {
                         </a>
                 </div>
         </nav>
+        <div class="table-wrapper">
         <table border="0">
             <thead>
                 <tr>
@@ -78,6 +78,7 @@ if (!isset($_SESSION['user_id'])) {
             <tbody id="orderTable">
             </tbody>
         </table>
+        </div>
     </div>
 </body>
 <script src="../javascript/orders.js"></script>

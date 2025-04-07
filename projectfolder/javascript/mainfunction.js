@@ -75,35 +75,38 @@ document.addEventListener("DOMContentLoaded", function () {
             let tableBody = document.getElementById("productTable");
             tableBody.innerHTML = "";
 
-            data.forEach((product) => {
-                let row = `
-                    <tr>
-                        <td>${product.product_id}</td>
-                        <td>${product.product_name}</td>
-                        <td>${product.product_description}</td>
-                        <td>${product.product_price}</td>
-                        <td>${product.product_sold}</td>
-                        <td>
-                            <img src="${product.product_imgUrl}" width="100" alt="Product Image">
-                        </td>
-                        <td>${product.product_stock}</td>
-                        <td>
-                            <button class="edit-btn" 
-                                data-id="${product.product_id}" 
-                                data-name="${product.product_name}"
-                                data-description="${product.product_description}"
-                                data-price="${product.product_price}"
-                                data-sold="${product.product_sold}"
-                                data-image="${product.product_imgUrl}"
-                                data-stock="${product.product_stock}">
-                                Edit
-                            </button>
-                            <button class="delete-btn" data-id="${product.product_id}">Delete</button>
-                        </td>
-                    </tr>
-                `;
-                tableBody.innerHTML += row;
-            });
+            // Update the button container structure in the `fetchProducts` and `searchProducts` sections
+data.forEach((product) => {
+    let row = `
+        <tr>
+            <td>${product.product_id}</td>
+            <td>${product.product_name}</td>
+            <td>${product.product_description}</td>
+            <td>${product.product_price}</td>
+            <td>${product.product_sold}</td>
+            <td>
+                <img src="${product.product_imgUrl}" width="100" alt="Product Image">
+            </td>
+            <td>${product.product_stock}</td>
+            <td>
+                <div class="button-container">
+                    <button class="delete-btn" data-id="${product.product_id}">Delete</button>
+                    <button class="edit-btn" 
+                        data-id="${product.product_id}" 
+                        data-name="${product.product_name}"
+                        data-description="${product.product_description}"
+                        data-price="${product.product_price}"
+                        data-sold="${product.product_sold}"
+                        data-image="${product.product_imgUrl}"
+                        data-stock="${product.product_stock}">
+                        Edit
+                    </button>
+                </div>
+            </td>
+        </tr>
+    `;
+    tableBody.innerHTML += row;
+});
         } catch (error) {
             console.error("Error fetching products:", error);
         }
